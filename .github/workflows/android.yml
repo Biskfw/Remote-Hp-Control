@@ -1,0 +1,19 @@
+name: Build APK
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git python3-dev python3-pip zip unzip libffi-dev libssl-dev libncursesw5-dev cmake libgstreamer1.0-dev
+          pip3 install --user --upgrade buildozer cython
+      - name: Build APK
+        run: yes | buildozer -v android debug
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hasil-Remote-APK
+          path: bin/*.apk
