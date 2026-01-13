@@ -1,0 +1,6 @@
+kivy
+kivymd
+pyTelegramBotAPI
+plyer
+requests
+pillow
